@@ -23,3 +23,24 @@ test('Testando cadastro de três perguntas', () => {
   expect(perguntas[2].num_respostas).toBe(0);
   expect(perguntas[1].id_pergunta).toBe(perguntas[2].id_pergunta-1);
 });
+
+// Novos testes para o modelo
+
+test('Testando cadastro e listagem de respostas', () => {
+  const id = modelo.cadastrar_pergunta('Qual a capital da França?');
+  modelo.cadastrar_resposta(id, 'Paris');
+  modelo.cadastrar_resposta(id, 'Lyon');
+
+  const respostas = modelo.listar_respostas(id);
+  expect(respostas.length).toBe(2);
+  expect(respostas[0].texto).toBe('Paris');
+  expect(respostas[1].texto).toBe('Lyon');
+});
+
+test('Verificando número de respostas é atualizado corretamente', () => {
+  const id = modelo.cadastrar_pergunta('Qual a cor do céu?');
+  modelo.cadastrar_resposta(id, 'Azul');
+
+  const perguntas = modelo.listar_perguntas();
+  expect(perguntas[0].num_respostas).toBe(1);
+});
