@@ -12,3 +12,4 @@ sequenceDiagram
     bd_utils-->>modelo: return
     modelo-->>server: id_pergunta
     server-->>browser: json
+
